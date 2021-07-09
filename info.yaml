@@ -7,7 +7,7 @@ project:
   organization_url: "https://sites.google.com/site/pegaillardon/home"
   owner: "Grant Brown"
   process: "SKY130"
-  project_name: "Caravel"
+  project_name: "SOFA-Plus-eFPGA"
   project_id: "00000000"
   tags:
     - "Open MPW"
