@@ -90,8 +90,8 @@ module user_project_wrapper #(
 
 fpga_top fpga_top_uut (
     `ifdef USE_POWER_PINS
-        .VDD(VDD),
-        .VSS(VSS),
+        .vccd1(VDD),
+        .vssd1(VSS),
     `endif
         // Wishbone wires
         .wb_clk_i(wb_clk_i),

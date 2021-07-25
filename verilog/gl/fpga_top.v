@@ -14,8 +14,8 @@ module fpga_top (
     //
     //
 `ifdef USE_POWER_PINS
-    input VDD,
-    input VSS,
+    input vccd1,
+    input vssd1,
  endif 
 
     //
@@ -38,7 +38,15 @@ module fpga_top (
     //
     input  [37:0] io_in,
     output [37:0] io_out,
-    output [37:0] io_oeb
+    output [37:0] io_oeb,
+
+    inout [28:0] analog_io,
+
+    // Independent clock (on independent integer divider)
+    input   user_clock2,
+
+    // User maskable interrupt signals
+    output [2:0] user_irq
 );
 
     //
@@ -74,7 +82,12 @@ module fpga_top (
     //
     //
     //
-    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV (.A(wb_la_switch), .Y(wb_la_switch_b));
+    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV_1 (.A(wb_la_switch), .Y(wb_la_switch_b_1));
+    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV_2 (.A(wb_la_switch), .Y(wb_la_switch_b_2));
+    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV_3 (.A(wb_la_switch), .Y(wb_la_switch_b_3));
+    sky130_fd_sc_hd__inv_2 WB_LA_SWITCH_INV_4 (.A(wb_la_switch), .Y(wb_la_switch_b_4));
+    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV_5 (.A(wb_la_switch), .Y(wb_la_switch_b_5));
+    sky130_fd_sc_hd__inv_8 WB_LA_SWITCH_INV_6 (.A(wb_la_switch), .Y(wb_la_switch_b_6));
 
     //
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[0] = io_in[24];
@@ -133,7 +146,8 @@ module fpga_top (
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[16] = io_in[6];
     assign io_out[6] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[16];
     assign io_oeb[6] = gfpga_pad_EMBEDDED_IO_HD_SOC_DIR[16];
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[17] = io_in[5];
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_1 (.A(io_in[5]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[17]));
+    //assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[17] = io_in[5];
     assign io_out[5] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[17];
     assign io_oeb[5] = gfpga_pad_EMBEDDED_IO_HD_SOC_DIR[17];
     //SOC_IN[18] is not used in this version
@@ -175,100 +189,119 @@ module fpga_top (
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[29] = la_data_in[117];
     assign la_data_out[117] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[29];
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[30] = la_data_in[116];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_30_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[30]), .Z(wbs_dat_o[0]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_30_DEMUX_WB (.TE_B(wb_la_switch_b_1), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[30]), .Z(wbs_dat_o[0]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_30_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[30]), .Z(la_data_out[116]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[31] = la_data_in[115];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_31_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[31]), .Z(wbs_dat_o[1]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_20 (.A(la_data_in[115]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[31]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[31] = la_data_in[115];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_31_DEMUX_WB (.TE_B(wb_la_switch_b_1), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[31]), .Z(wbs_dat_o[1]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_31_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[31]), .Z(la_data_out[115]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[32] = la_data_in[114];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_32_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[32]), .Z(wbs_dat_o[2]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_32_DEMUX_WB (.TE_B(wb_la_switch_b_1), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[32]), .Z(wbs_dat_o[2]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_32_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[32]), .Z(la_data_out[114]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[33] = la_data_in[113];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_33_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[33]), .Z(wbs_dat_o[3]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_33_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[33]), .Z(wbs_dat_o[3]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_33_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[33]), .Z(la_data_out[113]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[34] = la_data_in[112];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_34_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[34]), .Z(wbs_dat_o[4]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_34_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[34]), .Z(wbs_dat_o[4]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_34_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[34]), .Z(la_data_out[112]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[35] = la_data_in[111];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_35_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[35]), .Z(wbs_dat_o[5]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_2 (.A(la_data_in[111]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[35]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[35] = la_data_in[111];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_35_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[35]), .Z(wbs_dat_o[5]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_35_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[35]), .Z(la_data_out[111]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[36] = la_data_in[110];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_36_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[36]), .Z(wbs_dat_o[6]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_19 (.A(la_data_in[110]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[36]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[36] = la_data_in[110];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_36_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[36]), .Z(wbs_dat_o[6]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_36_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[36]), .Z(la_data_out[110]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[37] = la_data_in[109];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_37_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[37]), .Z(wbs_dat_o[7]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_37_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[37]), .Z(wbs_dat_o[7]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_37_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[37]), .Z(la_data_out[109]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[38] = la_data_in[108];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_38_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[38]), .Z(wbs_dat_o[8]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_3 (.A(la_data_in[108]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[38]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[38] = la_data_in[108];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_38_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[38]), .Z(wbs_dat_o[8]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_38_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[38]), .Z(la_data_out[108]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[39] = la_data_in[107];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_39_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[39]), .Z(wbs_dat_o[9]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_16 (.A(la_data_in[107]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[39]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[39] = la_data_in[107];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_39_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[39]), .Z(wbs_dat_o[9]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_39_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[39]), .Z(la_data_out[107]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[40] = la_data_in[106];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_40_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[40]), .Z(wbs_dat_o[10]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_40_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[40]), .Z(wbs_dat_o[10]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_40_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[40]), .Z(la_data_out[106]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[41] = la_data_in[105];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_41_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[41]), .Z(wbs_dat_o[11]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_4 (.A(la_data_in[105]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[41]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[41] = la_data_in[105];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_41_DEMUX_WB (.TE_B(wb_la_switch_b_3), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[41]), .Z(wbs_dat_o[11]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_41_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[41]), .Z(la_data_out[105]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[42] = la_data_in[104];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_42_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[42]), .Z(wbs_dat_o[12]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_5 (.A(la_data_in[104]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[42]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[42] = la_data_in[104];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_42_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[42]), .Z(wbs_dat_o[12]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_42_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[42]), .Z(la_data_out[104]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[43] = la_data_in[103];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_43_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[43]), .Z(wbs_dat_o[13]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_15 (.A(la_data_in[103]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[43]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[43] = la_data_in[103];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_43_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[43]), .Z(wbs_dat_o[13]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_43_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[43]), .Z(la_data_out[103]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[44] = la_data_in[102];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_44_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[44]), .Z(wbs_dat_o[14]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_6 (.A(la_data_in[102]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[44]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[44] = la_data_in[102];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_44_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[44]), .Z(wbs_dat_o[14]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_44_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[44]), .Z(la_data_out[102]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[45] = la_data_in[101];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_45_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[45]), .Z(wbs_dat_o[15]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_45_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[45]), .Z(wbs_dat_o[15]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_45_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[45]), .Z(la_data_out[101]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[46] = la_data_in[100];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_46_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[46]), .Z(wbs_dat_o[16]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_46_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[46]), .Z(wbs_dat_o[16]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_46_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[46]), .Z(la_data_out[100]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[47] = la_data_in[99];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_47_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[47]), .Z(wbs_dat_o[17]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_47_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[47]), .Z(wbs_dat_o[17]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_47_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[47]), .Z(la_data_out[99]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[48] = la_data_in[98];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_48_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[48]), .Z(wbs_dat_o[18]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_7 (.A(la_data_in[98]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[48]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[48] = la_data_in[98];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_48_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[48]), .Z(wbs_dat_o[18]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_48_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[48]), .Z(la_data_out[98]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[49] = la_data_in[97];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_49_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[49]), .Z(wbs_dat_o[19]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_49_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[49]), .Z(wbs_dat_o[19]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_49_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[49]), .Z(la_data_out[97]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[50] = la_data_in[96];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_50_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[50]), .Z(wbs_dat_o[20]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_8 (.A(la_data_in[96]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[50]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[50] = la_data_in[96];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_50_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[50]), .Z(wbs_dat_o[20]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_50_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[50]), .Z(la_data_out[96]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[51] = la_data_in[95];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_51_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[51]), .Z(wbs_dat_o[21]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_9 (.A(la_data_in[95]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[51]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[51] = la_data_in[95];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_51_DEMUX_WB (.TE_B(wb_la_switch_b_2), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[51]), .Z(wbs_dat_o[21]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_51_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[51]), .Z(la_data_out[95]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[52] = la_data_in[94];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_52_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[52]), .Z(wbs_dat_o[22]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_10 (.A(la_data_in[94]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[52]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[52] = la_data_in[94];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_52_DEMUX_WB (.TE_B(wb_la_switch_b_5), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[52]), .Z(wbs_dat_o[22]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_52_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[52]), .Z(la_data_out[94]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[53] = la_data_in[93];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_53_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[53]), .Z(wbs_dat_o[23]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_11 (.A(la_data_in[93]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[53]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[53] = la_data_in[93];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_53_DEMUX_WB (.TE_B(wb_la_switch_b_5), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[53]), .Z(wbs_dat_o[23]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_53_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[53]), .Z(la_data_out[93]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[54] = la_data_in[92];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_54_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[54]), .Z(wbs_dat_o[24]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_54_DEMUX_WB (.TE_B(wb_la_switch_b_5), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[54]), .Z(wbs_dat_o[24]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_54_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[54]), .Z(la_data_out[92]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[55] = la_data_in[91];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_55_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[55]), .Z(wbs_dat_o[25]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_18 (.A(la_data_in[91]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[55]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[55] = la_data_in[91];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_55_DEMUX_WB (.TE_B(wb_la_switch_b_6), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[55]), .Z(wbs_dat_o[25]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_55_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[55]), .Z(la_data_out[91]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[56] = la_data_in[90];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_56_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[56]), .Z(wbs_dat_o[26]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_56_DEMUX_WB (.TE_B(wb_la_switch_b_6), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[56]), .Z(wbs_dat_o[26]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_56_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[56]), .Z(la_data_out[90]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[57] = la_data_in[89];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_57_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[57]), .Z(wbs_dat_o[27]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_12 (.A(la_data_in[89]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[57]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[57] = la_data_in[89];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_57_DEMUX_WB (.TE_B(wb_la_switch_b_6), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[57]), .Z(wbs_dat_o[27]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_57_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[57]), .Z(la_data_out[89]));
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[58] = la_data_in[88];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_58_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[58]), .Z(wbs_dat_o[28]));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_58_DEMUX_WB (.TE_B(wb_la_switch_b_6), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[58]), .Z(wbs_dat_o[28]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_58_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[58]), .Z(la_data_out[88]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[59] = la_data_in[87];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_59_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[59]), .Z(wbs_dat_o[29]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_13 (.A(la_data_in[87]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[59]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[59] = la_data_in[87];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_59_DEMUX_WB (.TE_B(wb_la_switch_b_6), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[59]), .Z(wbs_dat_o[29]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_59_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[59]), .Z(la_data_out[87]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[60] = la_data_in[86];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_60_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[60]), .Z(wbs_dat_o[30]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_17 (.A(la_data_in[86]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[60]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[60] = la_data_in[86];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_60_DEMUX_WB (.TE_B(wb_la_switch_b_5), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[60]), .Z(wbs_dat_o[30]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_60_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[60]), .Z(la_data_out[86]));
-    assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[61] = la_data_in[85];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_61_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[61]), .Z(wbs_dat_o[31]));
+    sky130_fd_sc_hd__buf_4 ROUTING_BUF_14 (.A(la_data_in[85]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[61]));
+    // assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[61] = la_data_in[85];
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_61_DEMUX_WB (.TE_B(wb_la_switch_b_5), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[61]), .Z(wbs_dat_o[31]));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_61_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[61]), .Z(la_data_out[85]));
     sky130_fd_sc_hd__mux2_1 FPGA2SOC_IN_62_MUX (.S(wb_la_switch), .A1(wbs_dat_i[0]), .A0(la_data_in[84]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[62]));
     assign la_data_out[84] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[62];
@@ -413,7 +446,7 @@ module fpga_top (
     sky130_fd_sc_hd__mux2_1 FPGA2SOC_IN_132_MUX (.S(wb_la_switch), .A1(wbs_cyc_i), .A0(la_data_in[14]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[132]));
     assign la_data_out[14] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[132];
     assign gfpga_pad_EMBEDDED_IO_HD_SOC_IN[133] = la_data_in[13];
-    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_133_DEMUX_WB (.TE_B(wb_la_switch_b), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[133]), .Z(wbs_ack_o));
+    sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_133_DEMUX_WB (.TE_B(wb_la_switch_b_4), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[133]), .Z(wbs_ack_o));
     sky130_fd_sc_hd__ebufn_4 FPGA2SOC_OUT_133_DEMUX_LA (.TE_B(wb_la_switch), .A(gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[133]), .Z(la_data_out[13]));
     sky130_fd_sc_hd__mux2_1 FPGA2SOC_IN_134_MUX (.S(wb_la_switch), .A1(wb_rst_i), .A0(la_data_in[12]), .X(gfpga_pad_EMBEDDED_IO_HD_SOC_IN[134]));
     assign la_data_out[12] = gfpga_pad_EMBEDDED_IO_HD_SOC_OUT[134];
@@ -478,7 +511,7 @@ module fpga_top (
     assign io_oeb[25] = 1'b1;
 
     //
-    assign config_enable = IO_ISOL_N;
+    assign config_enable = io_in[11];
 
 	//Floating pins need to be attatched to cell to fix drcs
 	sky130_fd_sc_hd__conb_1 sky130_fd_sc_hd__conb_low_1 (.LO(la_data_out[0]));
@@ -505,7 +538,6 @@ module fpga_top (
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_float_10 (.A(la_data_in[9]), .X());
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_float_11 (.A(la_data_in[10]), .X());
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_float_12 (.A(io_in[35]), .X());
-	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_float_13 (.A(io_in[11]), .X());
 
     sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_oenb_float_0 (.A(la_oenb[0]), .X());
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_oenb_float_1 (.A(la_oenb[1]), .X());
@@ -635,6 +667,7 @@ module fpga_top (
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_oenb_float_125 (.A(la_oenb[125]), .X());
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_oenb_float_126 (.A(la_oenb[126]), .X());
 	sky130_fd_sc_hd__buf_1 sky130_fd_sc_hd__buf_oenb_float_127 (.A(la_oenb[127]), .X());
+
 
     fpga_core fpga_core_uut(
                         .prog_clk(prog_clk),

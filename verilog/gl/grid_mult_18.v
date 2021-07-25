@@ -177,6 +177,7 @@ module grid_mult_18
   wire [0:0] cby_reset_W_out_wire_1;
   wire [0:0] cby_reset_E_out_wire_1;
   wire [0:0] cby_prog_clk_0_W_in_wire_1;
+  wire prog_clk_0;
   assign top_width_0_height_0_subtile_0__pin_out_0_lower[0] = top_width_0_height_0_subtile_0__pin_out_0_upper[0];
   assign top_width_0_height_0_subtile_0__pin_out_1_lower[0] = top_width_0_height_0_subtile_0__pin_out_1_upper[0];
   assign top_width_0_height_0_subtile_0__pin_out_2_lower[0] = top_width_0_height_0_subtile_0__pin_out_2_upper[0];
@@ -222,7 +223,10 @@ module grid_mult_18
   assign grid_clb_reset_E_in_wire_1 = cby_reset_W_out_wire_1;
   assign grid_clb_reset_W_in_wire_2 = cby_reset_E_out_wire_1;
   assign cby_prog_clk_0_W_in_wire_1 = grid_clb_prog_clk_0_E_out_wire_1;
-
+  assign grid_clb_prog_clk_0_N_in_in_1 = grid_clb_prog_clk_0_S_in_in_1;
+  assign grid_clb_prog_clk_0_N_in_in_2 = grid_clb_prog_clk_0_S_in_in_2;
+  assign prog_clk = prog_clk_0;
+  
   logical_tile_mult_18_mode_mult_18_
   logical_tile_mult_18_mode_mult_18__0
   (
@@ -255,7 +259,6 @@ module grid_mult_18
     .sc_head_N_out(grid_clb_sc_head_N_out_out_1),
     .config_enable_N_in(grid_clb_config_enable_N_in_in_1),
     .prog_clk_0_N_in(grid_clb_prog_clk_0_N_in_in_1),
-    .prog_clk_0_S_in(grid_clb_prog_clk_0_S_in_in_1),
     .prog_clk_0_S_out(grid_clb_prog_clk_0_S_out_out_1),
     .prog_clk_0_E_out(grid_clb_prog_clk_0_E_out_wire_1),
     .prog_clk_0_W_out(grid_clb_prog_clk_0_W_out_out_1),
@@ -283,7 +286,6 @@ module grid_mult_18
     .sc_head_N_out(grid_clb_sc_head_N_out_out_2),
     .config_enable_N_in(grid_clb_config_enable_N_in_in_2),
     .prog_clk_0_N_in(grid_clb_prog_clk_0_N_in_in_2),
-    .prog_clk_0_S_in(grid_clb_prog_clk_0_S_in_in_2),
     .prog_clk_0_S_out(grid_clb_prog_clk_0_S_out_out_2),
     .prog_clk_0_E_out(grid_clb_prog_clk_0_E_out_out_2),
     .prog_clk_0_W_out(grid_clb_prog_clk_0_W_out_wire_2),
@@ -343,7 +345,7 @@ module grid_mult_18
   PROG_CLK_FTB
   (
     .A(grid_clb_prog_clk_0_N_in_in_1),
-    .Y(prog_clk)
+    .Y(prog_clk_0)
   );
 
 
