@@ -1,0 +1,55 @@
+Placement_File: and4.place Placement_ID: SHA256:4897791e8d13864fa80bc4789450d952a8fdf7c8b74dc1ed7a690affc8244b77
+Array size: 14 x 14 logic blocks.
+
+Routing:
+
+Net 0 (c)
+
+Node:	220	SOURCE (7,0)  Pad: 9  Switch: 0
+Node:	238	  OPIN (7,0)  Pad: 9  Switch: 4
+Node:	9020	 CHANX (7,0) to (10,0)  Track: (8, 10, 12, 14)  Switch: 2
+Node:	12786	 CHANY (7,1)  Track: 2  Switch: 1
+Node:	811	  IPIN (7,1)  Pin: 10   clb.I[10] Switch: 0
+Node:	780	  SINK (7,1)  Class: 0  Switch: -1
+
+
+Net 1 (a)
+
+Node:	217	SOURCE (7,0)  Pad: 3  Switch: 0
+Node:	235	  OPIN (7,0)  Pad: 3  Switch: 4
+Node:	9022	 CHANX (7,0) to (10,0)  Track: (16, 18, 20, 22)  Switch: 4
+Node:	12792	 CHANY (7,1) to (7,4)  Track: (8, 10, 12, 14)  Switch: 1
+Node:	818	  IPIN (7,1)  Pin: 17   clb.I[17] Switch: 0
+Node:	780	  SINK (7,1)  Class: 0  Switch: -1
+
+
+Net 2 (d)
+
+Node:	223	SOURCE (7,0)  Pad: 15  Switch: 0
+Node:	241	  OPIN (7,0)  Pad: 15  Switch: 4
+Node:	9026	 CHANX (7,0) to (10,0)  Track: (32, 34, 36, 38)  Switch: 4
+Node:	12804	 CHANY (7,1) to (7,2)  Track: (20, 22)  Switch: 1
+Node:	816	  IPIN (7,1)  Pin: 15   clb.I[15] Switch: 0
+Node:	780	  SINK (7,1)  Class: 0  Switch: -1
+
+
+Net 3 (b)
+
+Node:	218	SOURCE (7,0)  Pad: 5  Switch: 0
+Node:	236	  OPIN (7,0)  Pad: 5  Switch: 2
+Node:	9014	 CHANX (7,0)  Track: 0  Switch: 2
+Node:	12784	 CHANY (7,1)  Track: 0  Switch: 1
+Node:	810	  IPIN (7,1)  Pin: 9   clb.I[9] Switch: 0
+Node:	780	  SINK (7,1)  Class: 0  Switch: -1
+
+
+Net 4 (e)
+
+Node:	777	SOURCE (7,1)  Class: 15  Switch: 0
+Node:	796	  OPIN (7,1)  Pin: 32   clb.O[11] Switch: 4
+Node:	12802	 CHANY (7,1) to (7,3)  Track: (18, 20, 22)  Switch: 4
+Node:	9177	 CHANX (4,1) to (7,1)  Track: (31, 29, 27, 25)  Switch: 2
+Node:	12591	 CHANY (6,1)  Track: 1  Switch: 2
+Node:	9016	 CHANX (7,0)  Track: 2  Switch: 1
+Node:	246	  IPIN (7,0)  Pad: 6  Switch: 0
+Node:	228	  SINK (7,0)  Pad: 6  Switch: -1

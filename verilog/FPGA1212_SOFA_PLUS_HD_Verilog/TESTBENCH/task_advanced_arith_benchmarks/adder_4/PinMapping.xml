@@ -1,0 +1,22 @@
+<!--
+	- I/O mapping
+	-  removed 
+	-  removed 
+-->
+
+<io_mapping>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[83:83]" net="a_0_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[78:78]" net="a_1_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[69:69]" net="a_2_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[85:85]" net="a_3_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[74:74]" net="b_0_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[70:70]" net="b_1_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[86:86]" net="b_2_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[82:82]" net="b_3_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[80:80]" net="cin" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[90:90]" net="cout" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[76:76]" net="sum_0_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[84:84]" net="sum_1_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[79:79]" net="sum_2_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[81:81]" net="sum_3_" dir="output"/>
+</io_mapping>

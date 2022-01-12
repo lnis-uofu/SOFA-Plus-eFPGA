@@ -1,0 +1,31 @@
+Netlist_File: bin2bcd.net Netlist_ID: SHA256:295cce28ac1b46f4397acfcc290f8f8bc92d630822679d7ffacb052a3599f83e
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+bcd[5]		4	2	0	#0
+$abc$1706$new_n20_	6	2	0	#1
+bcd[1]		6	1	0	#2
+$abc$1706$new_n26_	5	2	0	#3
+bcd[0]		3	1	0	#4
+bcd[10]		7	1	0	#5
+out:bcd[1]	6	0	5	#6
+out:bcd[2]	6	0	3	#7
+out:bcd[3]	6	0	7	#8
+out:bcd[4]	6	0	4	#9
+out:bcd[5]	4	0	8	#10
+out:bcd[6]	4	0	2	#11
+out:bcd[7]	4	0	0	#12
+out:bcd[8]	4	0	3	#13
+out:bcd[9]	5	0	2	#14
+out:bcd[0]	3	0	6	#15
+out:bcd[10]	7	0	7	#16
+out:bcd[11]	7	0	0	#17
+bin[0]		3	0	1	#18
+bin[1]		6	0	2	#19
+bin[2]		5	0	5	#20
+bin[3]		6	0	1	#21
+bin[4]		5	0	4	#22
+bin[5]		5	0	6	#23
+bin[6]		6	0	0	#24
+bin[7]		6	0	8	#25
