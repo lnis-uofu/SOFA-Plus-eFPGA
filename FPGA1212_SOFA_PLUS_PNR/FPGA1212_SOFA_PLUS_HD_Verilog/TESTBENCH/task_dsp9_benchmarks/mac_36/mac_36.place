@@ -1,0 +1,23 @@
+Netlist_File: mac_36.net Netlist_ID: SHA256:01fe588eea4b67724f10d96b5b37143c93d5ec3ec71e69fa313de0a74aab81aa
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+$techmap$add$./benchmark/mac_36.v:11$2.$auto$alumacc.cc:485:replace_alu$103.A[0]	7	3	0	#0
+$abc$239$new_n16_	8	1	0	#1
+out:out[3]	8	0	4	#2
+out:out[2]	8	0	3	#3
+out:out[1]	7	0	6	#4
+out:out[0]	8	0	1	#5
+a[0]		7	0	1	#6
+a[1]		7	0	3	#7
+a[2]		7	0	0	#8
+a[3]		7	0	5	#9
+b[0]		7	0	2	#10
+b[1]		8	0	5	#11
+b[2]		8	0	6	#12
+b[3]		8	0	0	#13
+c[0]		8	0	2	#14
+c[1]		8	0	7	#15
+c[2]		7	0	8	#16
+c[3]		8	0	8	#17

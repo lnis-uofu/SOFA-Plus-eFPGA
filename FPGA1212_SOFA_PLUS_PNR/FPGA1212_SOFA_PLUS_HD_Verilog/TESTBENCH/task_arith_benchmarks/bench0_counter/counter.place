@@ -1,0 +1,17 @@
+Netlist_File: counter.net Netlist_ID: SHA256:f600fe48bb1d536da595bb98d40614bf334f115020b9ecb8feef7d4e22a3273c
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+$abc$335$new_n25_	8	2	0	#0
+$0\q_counter[7:0][5]	9	2	0	#1
+out:q_counter[0]	8	0	7	#2
+out:q_counter[1]	9	0	1	#3
+out:q_counter[2]	8	0	4	#4
+out:q_counter[3]	8	0	8	#5
+out:q_counter[4]	8	0	3	#6
+out:q_counter[5]	8	0	0	#7
+out:q_counter[6]	8	0	6	#8
+out:q_counter[7]	9	0	6	#9
+clk_counter	6	0	2	#10
+rst_counter	8	0	5	#11

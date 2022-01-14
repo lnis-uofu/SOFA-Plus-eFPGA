@@ -1,0 +1,80 @@
+<!--
+	- I/O mapping
+	-  removed 
+	-  removed 
+-->
+
+<io_mapping>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[80:80]" net="a_0_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[82:82]" net="a_1_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[67:67]" net="a_2_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[70:70]" net="a_3_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[51:51]" net="a_4_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[71:71]" net="a_5_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[56:56]" net="a_6_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[72:72]" net="a_7_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[62:62]" net="a_8_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[122:122]" net="a_9_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[133:133]" net="a_10_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[94:94]" net="a_11_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[105:105]" net="a_12_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[100:100]" net="a_13_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[111:111]" net="a_14_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[97:97]" net="a_15_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[120:120]" net="a_16_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[135:135]" net="a_17_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[69:69]" net="b_0_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[68:68]" net="b_1_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[61:61]" net="b_2_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[76:76]" net="b_3_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[77:77]" net="b_4_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[60:60]" net="b_5_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[74:74]" net="b_6_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[73:73]" net="b_7_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[64:64]" net="b_8_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[113:113]" net="b_9_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[118:118]" net="b_10_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[121:121]" net="b_11_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[103:103]" net="b_12_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[106:106]" net="b_13_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[98:98]" net="b_14_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[134:134]" net="b_15_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[87:87]" net="b_16_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[93:93]" net="b_17_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[75:75]" net="c_0_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[46:46]" net="c_1_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[52:52]" net="c_2_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[43:43]" net="c_3_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[59:59]" net="c_4_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[57:57]" net="c_5_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[50:50]" net="c_6_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[54:54]" net="c_7_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[81:81]" net="c_8_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[96:96]" net="c_9_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[102:102]" net="c_10_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[117:117]" net="c_11_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[91:91]" net="c_12_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[116:116]" net="c_13_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[112:112]" net="c_14_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[88:88]" net="c_15_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[107:107]" net="c_16_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[92:92]" net="c_17_" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[84:84]" net="out_0_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[65:65]" net="out_1_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[63:63]" net="out_2_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[44:44]" net="out_3_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[66:66]" net="out_4_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[53:53]" net="out_5_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[58:58]" net="out_6_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[49:49]" net="out_7_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[55:55]" net="out_8_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[101:101]" net="out_9_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[95:95]" net="out_10_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[110:110]" net="out_11_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[119:119]" net="out_12_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[109:109]" net="out_13_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[108:108]" net="out_14_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[90:90]" net="out_15_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[99:99]" net="out_16_" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[104:104]" net="out_17_" dir="output"/>
+</io_mapping>

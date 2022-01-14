@@ -1,0 +1,45 @@
+Netlist_File: mac_9.net Netlist_ID: SHA256:fcaa36112c00d7625ff9afaf73b3ad00d56ce4d0fc6c952f103dae42817ee158
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+$techmap$add$./benchmark/mac_9.v:11$2.$auto$alumacc.cc:485:replace_alu$103.A[0]	5	3	0	#0
+$abc$319$new_n31_	5	1	0	#1
+out[8]		6	1	0	#2
+out[3]		4	1	0	#3
+out:out[8]	7	0	5	#4
+out:out[7]	7	0	7	#5
+out:out[6]	5	0	1	#6
+out:out[5]	5	0	6	#7
+out:out[4]	6	0	0	#8
+out:out[3]	4	0	2	#9
+out:out[2]	4	0	0	#10
+out:out[1]	7	0	3	#11
+out:out[0]	6	0	2	#12
+a[0]		5	0	0	#13
+a[1]		5	0	5	#14
+a[2]		7	0	4	#15
+a[3]		4	0	8	#16
+a[4]		7	0	8	#17
+a[5]		5	0	2	#18
+a[6]		6	0	5	#19
+a[7]		5	0	3	#20
+a[8]		6	0	7	#21
+b[0]		5	0	4	#22
+b[1]		6	0	4	#23
+b[2]		6	0	3	#24
+b[3]		6	0	8	#25
+b[4]		4	0	1	#26
+b[5]		7	0	2	#27
+b[6]		4	0	5	#28
+b[7]		7	0	1	#29
+b[8]		7	0	0	#30
+c[0]		4	0	6	#31
+c[1]		6	0	1	#32
+c[2]		4	0	4	#33
+c[3]		4	0	3	#34
+c[4]		5	0	7	#35
+c[5]		5	0	8	#36
+c[6]		4	0	7	#37
+c[7]		6	0	6	#38
+c[8]		7	0	6	#39

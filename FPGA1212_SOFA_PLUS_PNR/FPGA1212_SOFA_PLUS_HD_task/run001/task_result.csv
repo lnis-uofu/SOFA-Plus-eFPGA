@@ -1,0 +1,2 @@
+packing_time,clb_blocks,routing_time,total_routing_time,placement_time,memory_blocks,name,total_wire_length,io_blocks,average_net_length,TotalRunTime,total_logic_block_area,critical_path,total_routing_area
+0.00,1,0.29,0.29,0.27,0,00_top_MIN_ROUTE_CHAN_WIDTH,13,3,4.33333,7,53894,1.5750000000000002e-08,2.16945

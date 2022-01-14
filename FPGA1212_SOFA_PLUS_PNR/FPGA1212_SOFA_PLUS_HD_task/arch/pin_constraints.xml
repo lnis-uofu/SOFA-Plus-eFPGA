@@ -1,0 +1,6 @@
+<pin_constraints>
+    <!-- For a given .blif file, we want to assign
+       - the rst_counter signal to the reset[0] port of the FPGA fabric
+    -->
+    <set_io pin="reset[0]" net="rst_counter" default_value="0"/>
+</pin_constraints>

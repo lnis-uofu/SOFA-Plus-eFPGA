@@ -1,9 +1,0 @@
-[RESULTS]
-clb_blocks = 24
-io_blocks = 54
-total_routing_area = 497934.
-total_logic_block_area = 2
-total_wire_length = 1869
-average_net_length = 10.5000
-critical_path = 1.0093000000000002e-07
-

@@ -1,0 +1,57 @@
+Netlist_File: pcm_slv_top.net Netlist_ID: SHA256:a0e3de28d429518670cc541a4f9f09a63a017d068fe929b095751a4bb5ffab65
+Array size: 14 x 14 logic blocks
+
+#block name	x	y	subblk	block number
+#----------	--	--	------	------------
+$abc$767$new_n242_	8	5	0	#0
+$shiftx$./benchmark/pcm_slv_top.v:0$11.Y	8	8	0	#1
+$0\tx_hold_reg[15:0][0]	6	5	0	#2
+$0\tx_hold_reg[15:0][3]	5	2	0	#3
+$0\tx_hold_reg[15:0][6]	8	2	0	#4
+$0\tx_hold_reg[15:0][9]	6	2	0	#5
+$0\tx_hold_reg[15:0][12]	7	2	0	#6
+$0\tx_hold_reg[15:0][15]	8	1	0	#7
+$0\rx_reg[15:0][0]	7	5	0	#8
+$0\rx_reg[15:0][1]	4	5	0	#9
+$0\rx_reg[15:0][2]	5	6	0	#10
+$0\rx_reg[15:0][3]	5	8	0	#11
+$0\rx_reg[15:0][4]	3	7	0	#12
+$0\rx_reg[15:0][5]	4	7	0	#13
+$0\rx_reg[15:0][6]	6	7	0	#14
+$0\rx_reg[15:0][7]	7	7	0	#15
+$0\rx_hold_reg[15:0][0]	5	5	0	#16
+$0\rx_hold_reg[15:0][2]	5	7	0	#17
+$0\rx_hold_reg[15:0][8]	7	8	0	#18
+$0\tx_cnt[3:0][2]	9	5	0	#19
+$abc$767$new_n310_	8	7	0	#20
+$0\tx_hold_byte_l[7:0][0]	7	1	0	#21
+$0\tx_hold_byte_l[7:0][1]	6	1	0	#22
+$0\tx_hold_byte_l[7:0][4]	5	1	0	#23
+out:dout_o[0]	7	0	3	#24
+out:dout_o[1]	4	0	2	#25
+out:dout_o[2]	5	0	8	#26
+out:dout_o[3]	5	0	1	#27
+out:dout_o[4]	0	7	0	#28
+out:dout_o[5]	4	0	8	#29
+out:dout_o[6]	5	0	0	#30
+out:dout_o[7]	7	0	0	#31
+out:pcm_dout_o	8	0	3	#32
+clk		2	0	5	#33
+rst		7	0	1	#34
+ssel[0]		8	0	4	#35
+ssel[1]		8	0	0	#36
+ssel[2]		8	0	5	#37
+pcm_clk_i	9	0	3	#38
+pcm_sync_i	5	0	3	#39
+pcm_din_i	5	0	2	#40
+din_i[0]	7	0	8	#41
+din_i[1]	6	0	1	#42
+din_i[2]	6	0	8	#43
+din_i[3]	6	0	6	#44
+din_i[4]	6	0	7	#45
+din_i[5]	7	0	2	#46
+din_i[6]	7	0	5	#47
+din_i[7]	8	0	1	#48
+re_i		0	5	0	#49
+we_i[0]		6	0	2	#50
+we_i[1]		7	0	6	#51

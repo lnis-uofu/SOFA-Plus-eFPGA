@@ -1,0 +1,13 @@
+<!--
+	- I/O mapping
+	-  removed 
+	-  removed 
+-->
+
+<io_mapping>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[45:45]" net="a" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[47:47]" net="b" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_IN[119:119]" net="clk" dir="input"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[46:46]" net="c" dir="output"/>
+	<io name="gfpga_pad_sofa_plus_io_SOC_OUT[48:48]" net="d" dir="output"/>
+</io_mapping>
